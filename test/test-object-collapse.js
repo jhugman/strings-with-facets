@@ -149,3 +149,32 @@ test('Real deep', function (t) {
   t.end();
 });
 
+
+test('Defaulting with empty keys', function (t) {
+
+  var options = {
+    platform: 'android',
+    flavor: 'dev'
+  };
+
+  var start, observed;
+
+  start = {
+    opt: {
+      android: 1,
+      ios: 2,
+      '': 3
+    }
+  };
+
+  observed = collapse(start, config);
+
+  t.deepEquals(observed, {
+    'opt.android': 1, 
+    'opt.ios': 2,
+    'opt': 3
+  });
+
+  t.end();
+});
+
