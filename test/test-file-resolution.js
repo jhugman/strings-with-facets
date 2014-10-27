@@ -168,7 +168,8 @@ test('Filtering a directory listing using a compound set of rules, with modifier
      'a', 'a.android', 'a.webview',
      'b', 'b.stage', 'b.test', 
      'c', 'c.android.stage', 'c.web', 'c.stage',
-     'f.js', 'f-generated.js',
+     'f.js', 'f-generated.js', 
+     'g-generated', 'g-generated.android',
   ];
   var file;
 
@@ -198,6 +199,12 @@ test('Filtering a directory listing using a compound set of rules, with modifier
     buildType: 'stage'
   }, config);
   t.equal(file, 'f-generated.js');
+
+  file = facets.resolve('g-generated', dirListing, {
+    platform: 'android',
+    buildType: 'stage'
+  }, config);
+  t.equal(file, 'g-generated.android');
 
   t.throws(function () {
     // we can't do this at this level.

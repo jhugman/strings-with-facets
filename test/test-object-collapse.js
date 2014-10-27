@@ -178,3 +178,38 @@ test('Defaulting with empty keys', function (t) {
   t.end();
 });
 
+
+test('Defaulting with empty keys', function (t) {
+
+  var options = {
+    platform: 'android',
+    flavor: 'dev'
+  };
+
+  var start, observed;
+
+  start = {
+    'icon': {
+      'android': {
+        'mdpi': 1,
+        'hpdi': 2,
+        'xhpdi': 3,
+        'xxhpdi': 4,
+        'xxxhpdi': 5,
+      },
+    }
+  };
+
+  observed = collapse(start, config);
+
+  t.deepEquals(observed, {
+    'icon.mdpi.android': 1,
+    'icon.hpdi.android': 2,
+    'icon.xhpdi.android': 3,
+    'icon.xxhpdi.android': 4,
+    'icon.xxxhpdi.android': 5,
+  });
+
+  t.end();
+});
+
